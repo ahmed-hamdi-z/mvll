@@ -1,0 +1,42 @@
+{
+  "name": "@multi-vendors-saas-shop/api-gateway",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "targets": {
+      "build": {
+        "executor": "@nx/esbuild:esbuild",
+        "outputs": [
+          "{options.outputPath}"
+        ],
+        "defaultConfiguration": "production",
+        "options": {
+          "platform": "node",
+          "outputPath": "apps/api-gateway/dist",
+          "main": "apps/api-gateway/src/main.ts",
+          "tsConfig": "apps/api-gateway/tsconfig.app.json"
+        }
+      },
+      "serve": {
+        "executor": "@nx/js:node",
+        "defaultConfiguration": "development",
+        "dependsOn": [
+          "build"
+        ],
+        "options": {
+          "buildTarget": "@multi-vendors-saas-shop/api-gateway:build",
+          "runBuildTargetDependencies": false,
+          "watch": true
+        },
+        "configurations": {
+          "development": {
+            "buildTarget": "@multi-vendors-saas-shop/api-gateway:build:development"
+          },
+          "production": {
+            "buildTarget": "@multi-vendors-saas-shop/api-gateway:build:production"
+          }
+        }
+      }
+    }
+  }
+}

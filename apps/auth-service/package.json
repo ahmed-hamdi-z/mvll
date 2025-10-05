@@ -1,0 +1,81 @@
+{
+  "name": "@multi-vendors-saas-shop/auth-service",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "node src/main.ts"
+  },
+  "nx": {
+    "targets": {
+      "build": {
+        "executor": "@nx/esbuild:esbuild",
+        "outputs": [
+          "{options.outputPath}"
+        ],
+        "defaultConfiguration": "production",
+        "options": {
+          "platform": "node",
+          "outputPath": "apps/auth-service/dist",
+          "format": [
+            "cjs"
+          ],
+          "bundle": true,
+          "main": "apps/auth-service/src/main.ts",
+          "tsConfig": "apps/auth-service/tsconfig.app.json",
+          "assets": [
+            "apps/auth-service/src/assets"
+          ],
+          "esbuildOptions": {
+            "sourcemap": true,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        },
+        "configurations": {
+          "development": {},
+          "production": {
+            "generateLockfile": true,
+            "esbuildOptions": {
+              "sourcemap": false,
+              "outExtension": {
+                ".js": ".js"
+              }
+            }
+          }
+        }
+      },
+      "serve": {
+        "continuous": true,
+        "executor": "@nx/js:node",
+        "defaultConfiguration": "development",
+        "dependsOn": [
+          "build"
+        ],
+        "options": {
+          "buildTarget": "@multi-vendors-saas-shop/auth-service:build",
+          "runBuildTargetDependencies": false
+        },
+        "configurations": {
+          "development": {
+            "buildTarget": "@multi-vendors-saas-shop/auth-service:build:development"
+          },
+          "production": {
+            "buildTarget": "@multi-vendors-saas-shop/auth-service:build:production"
+          }
+        }
+      },
+      "test": {
+        "options": {
+          "passWithNoTests": true
+        }
+      },
+      "docker-build": {
+        "dependsOn": [
+          "build"
+        ],
+        "command": "docker build -f apps/auth-service/Dockerfile . -t eshop-saas-auth-service"
+      }
+    }
+  }
+}
