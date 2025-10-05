@@ -1,11 +1,8 @@
 {
-  "name": "@milti-vendors-saas-shop/auth-service-e2e",
+  "name": "@multi-vendors-saas-shop/auth-service-e2e",
   "version": "0.0.1",
   "private": true,
   "nx": {
-    "implicitDependencies": [
-      "@milti-vendors-saas-shop/auth-service"
-    ],
     "targets": {
       "e2e": {
         "executor": "@nx/jest:jest",
@@ -17,8 +14,8 @@
           "passWithNoTests": true
         },
         "dependsOn": [
-          "@milti-vendors-saas-shop/auth-service:build",
-          "@milti-vendors-saas-shop/auth-service:serve"
+          "@multi-vendors-saas-shop/auth-service:build",
+          "@multi-vendors-saas-shop/auth-service:serve"
         ]
       }
     }
