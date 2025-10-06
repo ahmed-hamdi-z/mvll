@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "composite": true,
     "declarationMap": true,
     "emitDeclarationOnly": true,
@@ -16,6 +17,10 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es2022",
-    // "customConditions": ["@multi-vendors-saas-shop/source"]
+    "customConditions": ["development"],
+    "paths": {
+      "@multi-vendors-saas-shop/*": ["packages/*", "apps/*"],
+      "@multi-vendors-saas-shop/generated/prisma": ["generated/prisma"]
+    }
   }
 }
